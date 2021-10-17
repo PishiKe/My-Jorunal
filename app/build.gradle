@@ -59,4 +59,6 @@ dependencies {
 
     // To use Kotlin annotation processing tool (kapt)
     kapt("androidx.room:room-compiler:$room_version")
+
+    implementation 'com.karumi:dexter:6.2.3'
 }
