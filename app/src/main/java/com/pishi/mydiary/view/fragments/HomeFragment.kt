@@ -31,6 +31,10 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding!!.fabAddDiary.setOnClickListener {
+
+            startActivity(Intent(requireActivity(), DiaryEntry::class.java))
+        }
 
     }
 
