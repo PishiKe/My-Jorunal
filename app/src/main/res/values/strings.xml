@@ -9,4 +9,5 @@
     <string name="title">Title</string>
     <string name="diary_item_image_desc">Image of your diary entry if any</string>
     <string name="fab_description">Floating action button to add a new diary entry</string>
+    <string name="dear_diary">Dear Diary ...</string>
 </resources>
