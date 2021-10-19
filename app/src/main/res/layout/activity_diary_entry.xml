@@ -22,10 +22,11 @@
             android:contentDescription="@string/diary_item_image_desc" />
 
         <ImageView
+            android:id="@+id/iv_image_selection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_add_photo"
-            android:contentDescription=""
+            android:contentDescription="@string/add_photo_icon_description"
             android:layout_gravity="bottom|end"/>
 
 
