@@ -1,12 +1,17 @@
 package com.pishi.mydiary.view.activities
 
 import android.Manifest
+import android.app.AlertDialog
 import android.app.Dialog
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.hardware.Camera
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.Settings
+import android.widget.Toast
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -15,6 +20,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
+import com.pishi.mydiary.R
 import com.pishi.mydiary.databinding.ActivityDiaryEntryBinding
 import com.pishi.mydiary.databinding.ImageSelectionDialogBinding
 
@@ -75,31 +81,53 @@ class DiaryEntry : AppCompatActivity() {
                 Manifest.permission.READ_EXTERNAL_STORAGE
             ).withListener(object : PermissionListener{
                 override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
-                    TODO("Not yet implemented")
+
+                    val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                    startActivityForResult(galleryIntent, GALLERY)
                 }
 
                 override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
-                    TODO("Not yet implemented")
+                    Toast.makeText(this@DiaryEntry, "Gallery Permission Denied", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onPermissionRationaleShouldBeShown(
-                    p0: PermissionRequest?,
-                    p1: PermissionToken?
+                    permission: PermissionRequest?,
+                    token: PermissionToken?
                 ) {
-                    TODO("Not yet implemented")
+                    showRationaleDialogForPermission()
                 }
 
-            })
+            }).onSameThread().check()
+
+            dialog.dismiss()
         }
 
+        dialog.show()
     }
 
     private fun showRationaleDialogForPermission(){
+
+        AlertDialog.Builder(this).setMessage("Permissions for this feature are turned off. "+
+        "It can be enabled on the Application settings")
+            .setPositiveButton("GO TO SETTINGS")
+                {_,_ ->
+                    try {
+                        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                        val uri = Uri.fromParts("package", packageName, null)
+                        intent.data = uri
+                        startActivity(intent)
+                    } catch (e : ActivityNotFoundException){
+                        e.printStackTrace()
+                    }
+                }
+            .setNegativeButton("Cancel")
+                {dialog, _ -> dialog.dismiss()}.show()
 
     }
 
     companion object{
 
         private const val CAMERA = 1
+        private const val GALLERY = 2
     }
 }
