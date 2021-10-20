@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
+import android.view.View
 import android.widget.Toast
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -35,7 +36,7 @@ class DiaryEntry : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.ivImageSelection.setOnClickListener {
-
+            imageSelectionDialog()
         }
     }
 
@@ -46,7 +47,7 @@ class DiaryEntry : AppCompatActivity() {
 
         dialog.setContentView(binding.root)
 
-        binding.ivLaunchCamera.setOnClickListener {
+        binding.tvCameraSelection.setOnClickListener {
 
             Dexter.withContext(this).withPermissions(
                 Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -75,7 +76,7 @@ class DiaryEntry : AppCompatActivity() {
             dialog.dismiss()
         }
 
-        binding.ivLaunchGallery.setOnClickListener {
+        binding.tvGallerySelection.setOnClickListener {
 
             Dexter.withContext(this).withPermission(
                 Manifest.permission.READ_EXTERNAL_STORAGE

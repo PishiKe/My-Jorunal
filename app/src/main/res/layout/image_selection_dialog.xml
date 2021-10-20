@@ -1,43 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout
-    android:id="@+id/fl_image_selection_dialog"
-    android:layout_width="@dimen/_250sdp"
-    android:layout_height="@dimen/_150sdp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_gravity="center"
-    app:layout_constraintCircleRadius="@dimen/_10sdp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    app:layout_constraintCircleRadius="@dimen/_12sdp">
 
-    <ImageView
-        android:id="@+id/iv_launch_gallery"
-        android:layout_width="@dimen/_70sdp"
-        android:layout_height="@dimen/_70sdp"
-        android:src="@drawable/ic_gallery"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="@dimen/_32sdp"/>
-
-    <ImageView
-        android:id="@+id/iv_launch_camera"
-        android:layout_width="96dp"
-        android:layout_height="@dimen/_70sdp"
-        android:layout_gravity="center_vertical|end"
-        android:src="@drawable/ic_camera"
-        android:layout_marginEnd="@dimen/_32sdp"/>
 
     <TextView
+        android:id="@+id/tv_gallery_selection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/gallery"
         android:layout_gravity="bottom"
-        android:layout_marginStart="@dimen/_48sdp"
-        android:layout_marginBottom="@dimen/_16sdp"/>
+        android:gravity="center"
+        android:text="@string/gallery"
+        android:textSize="@dimen/_12sdp"
+        app:drawableTopCompat="@drawable/ic_gallery"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_camera_selection"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tv_camera_selection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/camera"
         android:layout_gravity="end|bottom"
-        android:layout_marginEnd="@dimen/_48sdp"
-        android:layout_marginBottom="@dimen/_16sdp"/>
-</FrameLayout>
+        android:text="@string/camera"
+        android:textSize="@dimen/_12sdp"
+        app:drawableTopCompat="@drawable/ic_camera"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_gallery_selection"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
