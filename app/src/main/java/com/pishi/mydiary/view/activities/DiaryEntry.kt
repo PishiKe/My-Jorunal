@@ -25,9 +25,10 @@ import com.pishi.mydiary.R
 import com.pishi.mydiary.databinding.ActivityDiaryEntryBinding
 import com.pishi.mydiary.databinding.ImageSelectionDialogBinding
 
-class DiaryEntry : AppCompatActivity() {
+class DiaryEntry : AppCompatActivity(), View.OnClickListener{
 
     private lateinit var binding: ActivityDiaryEntryBinding
+    
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +36,19 @@ class DiaryEntry : AppCompatActivity() {
         binding = ActivityDiaryEntryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.ivImageSelection.setOnClickListener {
-            imageSelectionDialog()
+        binding.ivImageSelection.setOnClickListener(this)
+    }
+    override fun onClick(v: View?) {
+        if (v != null){
+            when(v.id){
+                R.id.iv_image_selection ->{
+                    imageSelectionDialog()
+                    return
+                }
+            }
         }
     }
+
 
     private fun imageSelectionDialog(){
 
@@ -131,4 +141,6 @@ class DiaryEntry : AppCompatActivity() {
         private const val CAMERA = 1
         private const val GALLERY = 2
     }
+
+
 }
