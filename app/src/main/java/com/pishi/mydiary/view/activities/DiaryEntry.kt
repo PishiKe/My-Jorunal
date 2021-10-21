@@ -13,6 +13,7 @@ import android.provider.MediaStore
 import android.provider.Settings
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -22,13 +23,19 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
 import com.pishi.mydiary.R
+import com.pishi.mydiary.application.MyDiaryApplication
 import com.pishi.mydiary.databinding.ActivityDiaryEntryBinding
 import com.pishi.mydiary.databinding.ImageSelectionDialogBinding
+import com.pishi.mydiary.viewmodel.MyDiaryViewModel
+import com.pishi.mydiary.viewmodel.MyDiaryViewModelFactory
 
 class DiaryEntry : AppCompatActivity(), View.OnClickListener{
 
     private lateinit var binding: ActivityDiaryEntryBinding
-    
+
+    private val diaryViewModel : MyDiaryViewModel by viewModels{
+        MyDiaryViewModelFactory((application as MyDiaryApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +48,14 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
     override fun onClick(v: View?) {
         if (v != null){
             when(v.id){
-                R.id.iv_image_selection ->{
+                R.id.iv_image_selection -> {
                     imageSelectionDialog()
                     return
+                }
+                R.id.fab_save_entry ->{
+
+                    val title = binding.etDiaryTitle.text.toString().trim{ it <=' '}
+                    val dearDiary = binding.etDiaryEntry.text.toString().trim { it <=' '}
                 }
             }
         }
