@@ -8,8 +8,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "diary_entries")
 
 data class MyDiary(
-        @PrimaryKey(autoGenerate = true) var entryID : Int = 0,
+        @PrimaryKey(autoGenerate = true) var id : Int = 0,
         @ColumnInfo val image : String?,
+        @ColumnInfo (name = "image_src") val imageSrc : String,
         @ColumnInfo val title : String,
         @ColumnInfo val diaryEntry : String
 )

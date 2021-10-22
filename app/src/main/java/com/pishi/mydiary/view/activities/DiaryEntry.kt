@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
+import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -26,12 +28,17 @@ import com.pishi.mydiary.R
 import com.pishi.mydiary.application.MyDiaryApplication
 import com.pishi.mydiary.databinding.ActivityDiaryEntryBinding
 import com.pishi.mydiary.databinding.ImageSelectionDialogBinding
+import com.pishi.mydiary.model.entities.MyDiary
+import com.pishi.mydiary.utils.Constants
 import com.pishi.mydiary.viewmodel.MyDiaryViewModel
 import com.pishi.mydiary.viewmodel.MyDiaryViewModelFactory
 
 class DiaryEntry : AppCompatActivity(), View.OnClickListener{
 
     private lateinit var binding: ActivityDiaryEntryBinding
+    private var diaryEntryInfo : MyDiary? = null
+    private var imagePath : String = ""
+
 
     private val diaryViewModel : MyDiaryViewModel by viewModels{
         MyDiaryViewModelFactory((application as MyDiaryApplication).repository)
@@ -56,6 +63,44 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
 
                     val title = binding.etDiaryTitle.text.toString().trim{ it <=' '}
                     val dearDiary = binding.etDiaryEntry.text.toString().trim { it <=' '}
+
+                    when{
+                        TextUtils.isEmpty(title) ->{
+                            Toast.makeText(this, resources.getString(R.string.err_title_empty),
+                            Toast.LENGTH_SHORT).show()
+                        }
+                        TextUtils.isEmpty(dearDiary) ->{
+                            Toast.makeText(this, resources.getString(R.string.err_diary_entry_empty),
+                            Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            var entryID = 0
+                            var imageSource = Constants.IMAGE_SOURCE_LOCAL
+
+                            diaryEntryInfo?.let {
+                                if (it.id != 0){
+                                    entryID = it.id
+                                    imageSource = it.imageSrc
+                                }
+                            }
+
+                            val diaryEntryInfo : MyDiary = MyDiary(
+                                entryID,
+                                imagePath,
+                                imagePath,
+                                title,
+                                dearDiary)
+
+                            if (entryID == 0){
+                                diaryViewModel.insert(diaryEntryInfo)
+                                Toast.makeText(this,"Diary entry added",Toast.LENGTH_SHORT).show()
+                                Log.i("Insertion", "Diary Added")
+                            }
+                            else{
+                                Log.e("Insertion","Diary Entry Failed")
+                            }
+                        }
+                    }
                 }
             }
         }

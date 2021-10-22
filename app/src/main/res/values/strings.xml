@@ -16,4 +16,7 @@
     <string name="camera">Camera</string>
 
     <string name="gallery_permission_denied">Gallery Permission Denied</string>
+
+    <string name="err_title_empty">Please enter a title</string>
+    <string name="err_diary_entry_empty">Please enter your diary entry </string>
 </resources>
