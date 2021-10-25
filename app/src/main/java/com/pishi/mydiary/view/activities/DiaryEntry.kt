@@ -126,9 +126,6 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
         }
     }
 
-
-
-
     private fun imageSelectionDialog(){
 
         val dialog = Dialog(this)
