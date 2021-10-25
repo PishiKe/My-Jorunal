@@ -1,10 +1,15 @@
 package com.pishi.mydiary.view.activities
 
 import android.Manifest
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.hardware.Camera
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +21,13 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.graphics.drawable.toBitmap
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -32,6 +44,11 @@ import com.pishi.mydiary.model.entities.MyDiary
 import com.pishi.mydiary.utils.Constants
 import com.pishi.mydiary.viewmodel.MyDiaryViewModel
 import com.pishi.mydiary.viewmodel.MyDiaryViewModelFactory
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.OutputStream
+import java.util.*
 
 class DiaryEntry : AppCompatActivity(), View.OnClickListener{
 
@@ -99,12 +116,16 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
                             else{
                                 Log.e("Insertion","Diary Entry Failed")
                             }
+
+                            finish()
                         }
                     }
                 }
             }
         }
     }
+
+
 
 
     private fun imageSelectionDialog(){
@@ -193,10 +214,93 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK){
+            if (requestCode == CAMERA){
+                data?.extras?.let {
+                    val thumbnail : Bitmap = data.extras!!.get("data")as Bitmap
+
+                    Glide.with(this)
+                        .load(thumbnail)
+                        .centerCrop()
+                        .into(binding.ivDiaryEntry)
+
+                    imagePath = saveToInternalStorage(thumbnail)
+                    Log.i("Image Path", imagePath)
+                }
+            } else if (requestCode == GALLERY){
+                data?.let {
+                    val selectedPhotoUri =data.data
+
+                    Glide.with(this)
+                        .load(selectedPhotoUri)
+                        .centerCrop()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .listener(object : RequestListener<Drawable>{
+                            override fun onLoadFailed(
+                                e: GlideException?,
+                                model: Any?,
+                                target: Target<Drawable>?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                Log.i("TAG","Image Loading Error")
+
+                                return false
+                            }
+
+                            override fun onResourceReady(
+                                resource: Drawable?,
+                                model: Any?,
+                                target: Target<Drawable>?,
+                                dataSource: DataSource?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                resource?.let {
+                                    val bitmap : Bitmap =resource.toBitmap()
+                                    imagePath = saveToInternalStorage(bitmap)
+                                    Log.i("Image Path",imagePath)
+
+                                }
+                                return true
+                            }
+
+                        })
+                        .into(binding.ivDiaryEntry)
+                }
+            }
+        } else if (resultCode == RESULT_CANCELED){
+            Log.e("cancelled", "cancelled image seletion")
+        }
+    }
+
+    private fun saveToInternalStorage(bitmap: Bitmap): String{
+
+        val wrapper = ContextWrapper(applicationContext)
+
+        var file =wrapper.getDir(IMAGE_DIRECTORY, Context.MODE_PRIVATE)
+
+        file = File(file, "${UUID.randomUUID()}.jpg")
+
+        try {
+            val stream : OutputStream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+            stream.flush()
+            stream.close()
+        } catch (e: IOException){
+            e.printStackTrace()
+        }
+
+        return file.absolutePath
+    }
+
     companion object{
 
         private const val CAMERA = 1
         private const val GALLERY = 2
+
+        private const val IMAGE_DIRECTORY = "MyDiary Images"
     }
 
 
