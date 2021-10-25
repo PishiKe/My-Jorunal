@@ -68,6 +68,7 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
         setContentView(binding.root)
 
         binding.ivImageSelection.setOnClickListener(this)
+        binding.fabSaveEntry.setOnClickListener(this)
     }
     override fun onClick(v: View?) {
         if (v != null){
