@@ -1,5 +1,6 @@
 package com.pishi.mydiary.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -12,6 +13,8 @@ class MyDiaryViewModel (private val repository: MyDiaryRepository)  : ViewModel(
     fun insert(diary:MyDiary) =viewModelScope.launch {
         repository.insertDiaryData(diary)
     }
+
+    val allDiaryList : LiveData<List<MyDiary>> = repository.allDiaryList.
 }
 
 class MyDiaryViewModelFactory (private val repository: MyDiaryRepository) : ViewModelProvider.Factory{

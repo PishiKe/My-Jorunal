@@ -4,13 +4,23 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.pishi.mydiary.R
+import com.pishi.mydiary.application.MyDiaryApplication
 import com.pishi.mydiary.databinding.FragmentHomeBinding
 import com.pishi.mydiary.view.activities.DiaryEntry
+import com.pishi.mydiary.view.adapters.DiaryAdapter
+import com.pishi.mydiary.viewmodel.MyDiaryViewModel
+import com.pishi.mydiary.viewmodel.MyDiaryViewModelFactory
 
 class HomeFragment : Fragment() {
 
     private var binding : FragmentHomeBinding? = null
+    private lateinit var diaryAdapter : DiaryAdapter
+
+    private val myDiaryViewModel : MyDiaryViewModel by viewModels {
+        MyDiaryViewModelFactory((requireActivity().application as MyDiaryApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +40,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        diaryAdapter = DiaryAdapter(this)
+
+        binding!!.rvHome.adapter = diaryAdapter
+
 
         binding!!.fabAddDiary.setOnClickListener {
 

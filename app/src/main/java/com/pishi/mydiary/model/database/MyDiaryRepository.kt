@@ -2,6 +2,7 @@ package com.pishi.mydiary.model.database
 
 import androidx.annotation.WorkerThread
 import com.pishi.mydiary.model.entities.MyDiary
+import kotlinx.coroutines.flow.Flow
 
 class MyDiaryRepository(private val myDiaryDao: MyDiaryDao) {
 
@@ -10,4 +11,6 @@ class MyDiaryRepository(private val myDiaryDao: MyDiaryDao) {
 
         myDiaryDao.insertDiaryEntry(myDiary)
     }
+
+    val allDiaryList : Flow<List<MyDiary>> = myDiaryDao.getAllDiaryList()
 }
