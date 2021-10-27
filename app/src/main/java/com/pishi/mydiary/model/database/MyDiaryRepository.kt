@@ -13,4 +13,10 @@ class MyDiaryRepository(private val myDiaryDao: MyDiaryDao) {
     }
 
     val allDiaryList : Flow<List<MyDiary>> = myDiaryDao.getAllDiaryList()
+
+    @WorkerThread
+    suspend fun deleteSingleDiaryData(myDiary: MyDiary){
+
+        myDiaryDao.deleteDiaryEntry(myDiary)
+    }
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView
-    android:id="@+id/cv_diary_item"
+<androidx.cardview.widget.CardView android:id="@+id/cv_diary_item"
     android:layout_width="match_parent"
     android:layout_margin="@dimen/_8sdp"
     android:layout_height="@dimen/_150sdp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
         android:id="@+id/iv_diary_item"
@@ -21,5 +21,13 @@
         android:textSize="@dimen/_16sdp"
         android:layout_gravity="bottom"
         android:layout_margin="@dimen/_16sdp"/>
+
+    <ImageView
+        android:id="@+id/iv_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:src="@drawable/ic_more"
+        android:layout_gravity="top|end"
+        android:layout_margin="@dimen/_8sdp"/>
 
 </androidx.cardview.widget.CardView>

@@ -26,6 +26,7 @@ class DiaryAdapter (val fragment : Fragment) : RecyclerView.Adapter<DiaryAdapter
 
         Glide.with(fragment)
             .load(diaryEntry.image)
+            .centerCrop()
             .into(holder.ivImage)
 
         holder.tvTitle.text = diaryEntry.title

@@ -12,6 +12,10 @@ class MyDiaryViewModel (private val repository: MyDiaryRepository)  : ViewModel(
     }
 
     val allDiaryList : LiveData<List<MyDiary>> = repository.allDiaryList.asLiveData()
+
+    fun delete(diary: MyDiary) = viewModelScope.launch {
+        repository.deleteSingleDiaryData(diary)
+    }
 }
 
 class MyDiaryViewModelFactory (private val repository: MyDiaryRepository) : ViewModelProvider.Factory{
