@@ -42,4 +42,10 @@ class DiaryAdapter (val fragment : Fragment) : RecyclerView.Adapter<DiaryAdapter
         val tvTitle = view.tvDiaryTitle
 
     }
+
+    fun diaryEntryList (list: List<MyDiary>){
+
+        diaryEntries = list
+        notifyDataSetChanged()
+    }
 }

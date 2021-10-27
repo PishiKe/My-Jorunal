@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<FrameLayout
-    android:id="@+id/fl_diary_item"
+<androidx.cardview.widget.CardView
+    android:id="@+id/cv_diary_item"
     android:layout_width="match_parent"
     android:layout_margin="@dimen/_8sdp"
     android:layout_height="@dimen/_150sdp"
@@ -23,4 +23,4 @@
         android:layout_gravity="bottom"
         android:layout_margin="@dimen/_16sdp"/>
 
-</FrameLayout>
+</androidx.cardview.widget.CardView>

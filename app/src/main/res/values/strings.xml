@@ -19,4 +19,6 @@
 
     <string name="err_title_empty">Please enter a title</string>
     <string name="err_diary_entry_empty">Please enter your diary entry </string>
+
+    <string name="no_entry_added">No Diary Entry Added Yet!</string>
 </resources>

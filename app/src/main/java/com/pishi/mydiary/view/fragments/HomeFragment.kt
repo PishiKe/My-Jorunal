@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.pishi.mydiary.R
 import com.pishi.mydiary.application.MyDiaryApplication
 import com.pishi.mydiary.databinding.FragmentHomeBinding
@@ -15,12 +18,14 @@ import com.pishi.mydiary.viewmodel.MyDiaryViewModelFactory
 
 class HomeFragment : Fragment() {
 
-    private var binding : FragmentHomeBinding? = null
+    private lateinit var _binding : FragmentHomeBinding
     private lateinit var diaryAdapter : DiaryAdapter
 
     private val myDiaryViewModel : MyDiaryViewModel by viewModels {
         MyDiaryViewModelFactory((requireActivity().application as MyDiaryApplication).repository)
     }
+
+    private val binding get() = _binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,20 +38,38 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         // Inflate the layout for this fragment
-        return binding!!.root
+        return _binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        _binding.rvHome.layoutManager = LinearLayoutManager(requireActivity())
+
         diaryAdapter = DiaryAdapter(this)
 
-        binding!!.rvHome.adapter = diaryAdapter
+        _binding.rvHome.adapter = diaryAdapter
+
+        myDiaryViewModel.allDiaryList.observe(viewLifecycleOwner){
+            entries ->
+                entries.let {
+                    if (it.isNotEmpty()){
+                        _binding.rvHome.visibility = View.VISIBLE
+                        _binding.tvNoEntriesAdded.visibility = View.INVISIBLE
+
+                        diaryAdapter.diaryEntryList(it)
+                    }
+                    else{
+                        _binding.rvHome.visibility = View.INVISIBLE
+                        _binding.tvNoEntriesAdded.visibility =  View.GONE
+                    }
+                }
+        }
 
 
-        binding!!.fabAddDiary.setOnClickListener {
+        _binding.fabAddDiary.setOnClickListener {
 
             startActivity(Intent(requireActivity(), DiaryEntry::class.java))
         }

@@ -1,20 +1,17 @@
 package com.pishi.mydiary.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.pishi.mydiary.model.database.MyDiaryRepository
 import com.pishi.mydiary.model.entities.MyDiary
 import kotlinx.coroutines.launch
 
 class MyDiaryViewModel (private val repository: MyDiaryRepository)  : ViewModel() {
 
-    fun insert(diary:MyDiary) =viewModelScope.launch {
+    fun insert(diary:MyDiary) = viewModelScope.launch {
         repository.insertDiaryData(diary)
     }
 
-    val allDiaryList : LiveData<List<MyDiary>> = repository.allDiaryList.
+    val allDiaryList : LiveData<List<MyDiary>> = repository.allDiaryList.asLiveData()
 }
 
 class MyDiaryViewModelFactory (private val repository: MyDiaryRepository) : ViewModelProvider.Factory{
