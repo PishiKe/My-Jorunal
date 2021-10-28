@@ -3,31 +3,52 @@
 <androidx.cardview.widget.CardView android:id="@+id/cv_diary_item"
     android:layout_width="match_parent"
     android:layout_margin="@dimen/_8sdp"
-    android:layout_height="@dimen/_150sdp"
+    android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardElevation="@dimen/_8sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/iv_diary_item"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/_104sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
         android:contentDescription="@string/diary_item_image_desc" />
 
-    <TextView
-        android:id="@+id/tv_diary_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title"
-        android:textSize="@dimen/_16sdp"
-        android:layout_gravity="bottom"
-        android:layout_margin="@dimen/_16sdp"/>
 
     <ImageButton
         android:id="@+id/ib_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:src="@drawable/ic_more"
+        android:backgroundTint="@android:color/transparent"
         android:layout_gravity="top|end"
+        android:layout_margin="@dimen/_8sdp"
+        android:foreground="?attr/selectableItemBackgroundBorderless"/>
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_diary_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        android:textSize="@dimen/_12sdp"
+        android:layout_gravity="bottom"
         android:layout_margin="@dimen/_8sdp"/>
+
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>
