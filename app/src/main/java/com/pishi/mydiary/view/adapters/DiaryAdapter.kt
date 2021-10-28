@@ -53,7 +53,12 @@ class DiaryAdapter (val fragment : Fragment) : RecyclerView.Adapter<DiaryAdapter
             }
             popup.show()
         }
+
+        holder.itemView.setOnClickListener{
+            Toast.makeText(fragment.requireActivity(),"Diary Item Clicked", Toast.LENGTH_SHORT).show()
+        }
     }
+
 
     override fun getItemCount(): Int {
 
