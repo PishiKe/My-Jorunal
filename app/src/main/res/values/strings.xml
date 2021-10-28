@@ -21,4 +21,7 @@
     <string name="err_diary_entry_empty">Please enter your diary entry </string>
 
     <string name="no_entry_added">No Diary Entry Added Yet!</string>
+
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>
