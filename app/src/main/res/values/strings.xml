@@ -24,4 +24,12 @@
 
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+
+    <string name="edit_entry">Edit Entry</string>
+    <string name="delete_entry">Delete Entry</string>
+    <string name="msg_delete_entry">Are you sure you want to delete %1$s.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+
 </resources>

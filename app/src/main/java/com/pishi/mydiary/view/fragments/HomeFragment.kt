@@ -1,8 +1,10 @@
 package com.pishi.mydiary.view.fragments
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pishi.mydiary.R
 import com.pishi.mydiary.application.MyDiaryApplication
 import com.pishi.mydiary.databinding.FragmentHomeBinding
+import com.pishi.mydiary.model.entities.MyDiary
 import com.pishi.mydiary.view.activities.DiaryEntry
 import com.pishi.mydiary.view.adapters.DiaryAdapter
 import com.pishi.mydiary.viewmodel.MyDiaryViewModel
@@ -92,6 +95,26 @@ class HomeFragment : Fragment() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    fun deleteDiaryEntry(diaryEntry: MyDiary){
+
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setTitle(resources.getString(R.string.delete_entry))
+        builder.setMessage(resources.getString(R.string.msg_delete_entry, diaryEntry.title))
+        builder.setIcon(ResourcesCompat.getDrawable(resources,R.drawable.ic_warning,null))
+        builder.setPositiveButton(resources.getString(R.string.yes)){ dialogInterface, _ ->
+            myDiaryViewModel.delete(diaryEntry)
+            dialogInterface.dismiss()
+        }
+
+        builder.setNegativeButton(resources.getString(R.string.no)){ dialogInterface, _ ->
+            dialogInterface.dismiss()
+        }
+
+        val alertDialog : AlertDialog = builder.create()
+        alertDialog.setCancelable(false)
+        alertDialog.show()
     }
 
 }
