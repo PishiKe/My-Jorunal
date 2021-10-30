@@ -10,6 +10,15 @@
         android:id="@+id/homeFragment"
         android:name="com.pishi.mydiary.view.fragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_diaryEntry"
+            app:destination="@id/diaryEntry" />
+    </fragment>
+    <activity
+        android:id="@+id/diaryEntry"
+        android:name="com.pishi.mydiary.view.activities.DiaryEntry"
+        android:label="activity_diary_entry"
+        tools:layout="@layout/activity_diary_entry" />
 
 </navigation>

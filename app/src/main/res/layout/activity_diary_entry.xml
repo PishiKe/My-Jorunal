@@ -7,6 +7,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.activities.DiaryEntry">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_diary_entry_activity"
+        android:layout_width="@dimen/_409sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:minHeight="?attr/minHeight"
+        android:theme="?attr/actionBarTheme"
+        android:background="@color/primaryColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <FrameLayout
         android:id="@+id/fl_diary_entry"
         android:layout_width="match_parent"

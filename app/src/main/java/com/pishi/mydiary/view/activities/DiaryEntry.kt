@@ -67,6 +67,12 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
         binding = ActivityDiaryEntryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (intent.hasExtra(Constants.FILLED_DIARY_DATA)){
+            diaryEntryInfo = intent.getParcelableExtra(Constants.FILLED_DIARY_DATA)
+        }
+
+        setUpActionBar()
+
         binding.ivImageSelection.setOnClickListener(this)
         binding.fabSaveEntry.setOnClickListener(this)
     }
@@ -292,6 +298,21 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
 
         return file.absolutePath
     }
+
+    private fun setUpActionBar(){
+        setSupportActionBar(binding.toolbarDiaryEntryActivity)
+
+        if (diaryEntryInfo!! != null  && diaryEntryInfo!!.id != 0){
+            supportActionBar?.let {
+                it.title = resources.getString(R.string.edit_entry)
+            } }
+        else {
+                supportActionBar?.let {
+                    it.title = resources.getString(R.string.add_entry)
+                }
+            }
+    }
+
 
     companion object{
 
