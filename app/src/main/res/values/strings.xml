@@ -31,5 +31,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
+    <string name="add_photo">Add Photo</string>
+
 
 </resources>

@@ -18,7 +18,6 @@
         android:theme="@style/Theme.MyDiary">
         <activity
             android:name=".view.activities.DiaryEntry"
-            android:theme="@style/Theme.MyDiary.NoActionBar"
             android:exported="true" />
 
         <activity
