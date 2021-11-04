@@ -311,7 +311,12 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        imageSelectionDialog()
+        when (item.itemId) {
+            R.id.add_photo_menu ->{
+                imageSelectionDialog()
+                return true 
+            }
+        }
         return super.onOptionsItemSelected(item)
     }
 
