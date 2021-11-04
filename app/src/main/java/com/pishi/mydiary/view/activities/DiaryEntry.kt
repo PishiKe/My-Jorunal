@@ -18,6 +18,9 @@ import android.provider.MediaStore
 import android.provider.Settings
 import android.text.TextUtils
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -298,6 +301,19 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
         return file.absolutePath
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater): Boolean {
+
+        inflater.inflate(R.menu.add_image, menu)
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        imageSelectionDialog()
+        return super.onOptionsItemSelected(item)
+    }
 
 
     companion object{
