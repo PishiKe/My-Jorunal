@@ -66,6 +66,7 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
 
         binding = ActivityDiaryEntryBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -301,8 +302,9 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
         return file.absolutePath
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
+        val inflater : MenuInflater = menuInflater
         inflater.inflate(R.menu.add_image, menu)
 
         return super.onCreateOptionsMenu(menu)
@@ -314,7 +316,7 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
         when (item.itemId) {
             R.id.add_photo_menu ->{
                 imageSelectionDialog()
-                return true 
+                return true
             }
         }
         return super.onOptionsItemSelected(item)
