@@ -8,51 +8,22 @@
     tools:context=".view.activities.DiaryEntry">
 
 
-
-    <FrameLayout
-        android:id="@+id/fl_diary_entry"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="@dimen/_8sdp">
-
-        <ImageView
-            android:id="@+id/iv_diary_entry"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:srcCompat="@tools:sample/avatars"
-            android:background="@color/white"
-            android:scaleType="fitXY"
-            android:contentDescription="@string/diary_item_image_desc" />
-
-        <ImageView
-            android:id="@+id/iv_image_selection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_add_photo"
-            android:contentDescription="@string/add_photo_icon_description"
-            android:layout_gravity="bottom|end"/>
-
-
-    </FrameLayout>
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/title_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="@string/title"
         android:layout_margin="@dimen/_8sdp"
+        android:hint="@string/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fl_diary_entry">
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/et_diary_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:importantForAutofill="no"
-            android:backgroundTint="@color/white"/>
+            android:backgroundTint="@color/white"
+            android:importantForAutofill="no" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

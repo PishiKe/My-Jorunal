@@ -66,7 +66,7 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
 
         binding = ActivityDiaryEntryBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -76,16 +76,12 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
         }
 
 
-        binding.ivImageSelection.setOnClickListener(this)
         binding.fabSaveEntry.setOnClickListener(this)
     }
     override fun onClick(v: View?) {
         if (v != null){
             when(v.id){
-                R.id.iv_image_selection -> {
-                    imageSelectionDialog()
-                    return
-                }
+
                 R.id.fab_save_entry ->{
 
                     val title = binding.etDiaryTitle.text.toString().trim{ it <=' '}
@@ -232,7 +228,6 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
                     Glide.with(this)
                         .load(thumbnail)
                         .centerCrop()
-                        .into(binding.ivDiaryEntry)
 
                     imagePath = saveToInternalStorage(thumbnail)
                     Log.i("Image Path", imagePath)
@@ -274,7 +269,7 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
                             }
 
                         })
-                        .into(binding.ivDiaryEntry)
+
                 }
             }
         } else if (resultCode == RESULT_CANCELED){
