@@ -62,7 +62,9 @@ class DiaryAdapter (val fragment : Fragment) : RecyclerView.Adapter<DiaryAdapter
         }
 
         holder.itemView.setOnClickListener{
-            Toast.makeText(fragment.requireActivity(),"Diary Item Clicked", Toast.LENGTH_SHORT).show()
+            val intent = Intent(fragment.requireActivity(), DiaryEntry::class.java)
+            intent.putExtra(Constants.FILLED_DIARY_DATA, diaryEntry)
+            fragment.requireActivity().startActivity(intent)
         }
     }
 
