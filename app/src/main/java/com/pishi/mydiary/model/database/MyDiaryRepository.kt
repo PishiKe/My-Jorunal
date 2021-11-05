@@ -19,4 +19,10 @@ class MyDiaryRepository(private val myDiaryDao: MyDiaryDao) {
 
         myDiaryDao.deleteDiaryEntry(myDiary)
     }
+
+    @WorkerThread
+    suspend fun updateDiaryEntry(myDiary: MyDiary){
+
+        myDiaryDao.updateDiaryEntry(myDiary)
+    }
 }

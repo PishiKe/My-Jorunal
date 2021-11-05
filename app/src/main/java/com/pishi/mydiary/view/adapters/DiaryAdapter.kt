@@ -1,5 +1,6 @@
 package com.pishi.mydiary.view.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
@@ -10,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.pishi.mydiary.R
 import com.pishi.mydiary.databinding.DiaryItemBinding
 import com.pishi.mydiary.model.entities.MyDiary
+import com.pishi.mydiary.utils.Constants
+import com.pishi.mydiary.view.activities.DiaryEntry
 import com.pishi.mydiary.view.fragments.HomeFragment
 
 class DiaryAdapter (val fragment : Fragment) : RecyclerView.Adapter<DiaryAdapter.ViewHolder>(){
@@ -42,7 +45,11 @@ class DiaryAdapter (val fragment : Fragment) : RecyclerView.Adapter<DiaryAdapter
 
             popup.setOnMenuItemClickListener {
                 if (it.itemId == R.id.edit_menu){
-                    Toast.makeText(fragment.context, "edit diary clicked", Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent(fragment.requireActivity(), DiaryEntry::class.java)
+                    intent.putExtra(Constants.FILLED_DIARY_DATA, diaryEntry)
+                    fragment.requireActivity().startActivity(intent)
+
                 } else if (it.itemId == R.id.delete_menu){
                     if (fragment is HomeFragment){
                         fragment.deleteDiaryEntry(diaryEntry)

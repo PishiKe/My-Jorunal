@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.pishi.mydiary.model.entities.MyDiary
 
-@Database (entities = [MyDiary::class], version = 1)
+@Database (entities = [MyDiary::class], version = 2)
 
 abstract class DiaryDatabase : RoomDatabase() {
 

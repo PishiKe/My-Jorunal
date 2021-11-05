@@ -16,6 +16,11 @@ class MyDiaryViewModel (private val repository: MyDiaryRepository)  : ViewModel(
     fun delete(diary: MyDiary) = viewModelScope.launch {
         repository.deleteSingleDiaryData(diary)
     }
+
+    fun update(diary: MyDiary) = viewModelScope.launch {
+
+        repository.updateDiaryEntry(diary)
+    }
 }
 
 class MyDiaryViewModelFactory (private val repository: MyDiaryRepository) : ViewModelProvider.Factory{

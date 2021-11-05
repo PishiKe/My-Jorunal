@@ -11,7 +11,7 @@ import kotlinx.parcelize.Parcelize
 
 data class MyDiary(
         @PrimaryKey(autoGenerate = true) var id : Int = 0,
-        @ColumnInfo val image : String?,
+        @ColumnInfo val image : String,
         @ColumnInfo (name = "image_src") val imageSrc : String,
         @ColumnInfo val title : String,
         @ColumnInfo val diaryEntry : String

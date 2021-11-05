@@ -7,6 +7,7 @@ import android.view.*
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,7 @@ import com.pishi.mydiary.application.MyDiaryApplication
 import com.pishi.mydiary.databinding.FragmentHomeBinding
 import com.pishi.mydiary.model.entities.MyDiary
 import com.pishi.mydiary.view.activities.DiaryEntry
+import com.pishi.mydiary.view.activities.MainActivity
 import com.pishi.mydiary.view.adapters.DiaryAdapter
 import com.pishi.mydiary.viewmodel.MyDiaryViewModel
 import com.pishi.mydiary.viewmodel.MyDiaryViewModelFactory
@@ -114,5 +116,6 @@ class HomeFragment : Fragment() {
         alertDialog.setCancelable(false)
         alertDialog.show()
     }
+
 
 }

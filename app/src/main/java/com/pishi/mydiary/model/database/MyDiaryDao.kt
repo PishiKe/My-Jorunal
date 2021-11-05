@@ -1,9 +1,6 @@
 package com.pishi.mydiary.model.database
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.pishi.mydiary.model.entities.MyDiary
 import kotlinx.coroutines.flow.Flow
 
@@ -17,4 +14,7 @@ interface MyDiaryDao {
 
     @Delete
     suspend fun deleteDiaryEntry (myDiary: MyDiary)
+
+    @Update
+    suspend fun updateDiaryEntry (myDiary: MyDiary)
 }

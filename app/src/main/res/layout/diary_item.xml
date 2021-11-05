@@ -23,22 +23,18 @@
                 android:id="@+id/iv_diary_item"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_104sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
                 android:scaleType="fitXY"
                 android:contentDescription="@string/diary_item_image_desc" />
 
-
-            <ImageButton
-                android:id="@+id/ib_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:src="@drawable/ic_more"
-                android:backgroundTint="@android:color/transparent"
-                android:layout_gravity="top|end"
-                android:layout_margin="@dimen/_8sdp"
-                android:foreground="?attr/selectableItemBackgroundBorderless"/>
+                <ImageButton
+                    android:id="@+id/ib_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_more"
+                    android:backgroundTint="@android:color/transparent"
+                    android:layout_gravity="top|end"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/diary_item_image_desc" />
 
         </FrameLayout>
 

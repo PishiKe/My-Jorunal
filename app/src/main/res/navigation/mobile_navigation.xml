@@ -14,11 +14,16 @@
         <action
             android:id="@+id/action_homeFragment_to_diaryEntry"
             app:destination="@id/diaryEntry" />
+
     </fragment>
     <activity
         android:id="@+id/diaryEntry"
         android:name="com.pishi.mydiary.view.activities.DiaryEntry"
         android:label="activity_diary_entry"
         tools:layout="@layout/activity_diary_entry" />
+
+        <argument
+            android:name="diaryInfo"
+            app:argType="com.pishi.mydiary.model.entities.MyDiary"/>
 
 </navigation>

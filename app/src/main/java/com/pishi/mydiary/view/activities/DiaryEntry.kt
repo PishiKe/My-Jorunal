@@ -60,6 +60,7 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
     private var imagePath : String = ""
 
 
+
     private val diaryViewModel : MyDiaryViewModel by viewModels{
         MyDiaryViewModelFactory((application as MyDiaryApplication).repository)
     }
@@ -73,6 +74,16 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
 
         if (intent.hasExtra(Constants.FILLED_DIARY_DATA)){
             diaryEntryInfo = intent.getParcelableExtra(Constants.FILLED_DIARY_DATA)
+        }
+
+        diaryEntryInfo?.let {
+            if (it.id != 0){
+
+                imagePath = it.image
+                binding.etDiaryTitle.setText(it.title)
+                binding.etDiaryEntry.setText(it.diaryEntry)
+
+            }
         }
 
 
@@ -110,7 +121,7 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
                             val diaryEntryInfo : MyDiary = MyDiary(
                                 entryID,
                                 imagePath,
-                                imagePath,
+                                imageSource,
                                 title,
                                 dearDiary)
 
@@ -120,8 +131,9 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
                                 Log.i("Insertion", "Diary Added")
                             }
                             else{
-                                Log.e("Insertion","Diary Entry Failed")
-                            }
+                                diaryViewModel.update(diaryEntryInfo)
+
+                                Toast.makeText(this,"Edit Success", Toast.LENGTH_SHORT).show()                            }
 
                             finish()
                         }
@@ -225,10 +237,6 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
                 data?.extras?.let {
                     val thumbnail : Bitmap = data.extras!!.get("data")as Bitmap
 
-                    Glide.with(this)
-                        .load(thumbnail)
-                        .centerCrop()
-
                     imagePath = saveToInternalStorage(thumbnail)
                     Log.i("Image Path", imagePath)
                 }
@@ -263,17 +271,18 @@ class DiaryEntry : AppCompatActivity(), View.OnClickListener{
                                     val bitmap : Bitmap =resource.toBitmap()
                                     imagePath = saveToInternalStorage(bitmap)
                                     Log.i("Image Path",imagePath)
-
                                 }
                                 return true
                             }
 
                         })
+                        .into(binding.ivDiaryEntry)
+
 
                 }
             }
         } else if (resultCode == RESULT_CANCELED){
-            Log.e("cancelled", "cancelled image seletion")
+            Log.e("cancelled", "cancelled image selection")
         }
     }
 
