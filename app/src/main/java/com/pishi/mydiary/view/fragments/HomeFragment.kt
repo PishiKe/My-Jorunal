@@ -117,5 +117,7 @@ class HomeFragment : Fragment() {
         alertDialog.show()
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
 }

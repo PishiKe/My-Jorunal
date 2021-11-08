@@ -17,4 +17,5 @@ interface MyDiaryDao {
 
     @Update
     suspend fun updateDiaryEntry (myDiary: MyDiary)
+
 }
