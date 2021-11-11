@@ -17,19 +17,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyDiary">
         <activity
-            android:name=".view.activities.SplashScreen"
-            android:exported="false" />
+            android:name=".view.activities.SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".view.activities.DiaryEntry"
             android:exported="true" />
         <activity
             android:name=".view.activities.MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
