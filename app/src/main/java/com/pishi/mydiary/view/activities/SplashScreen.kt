@@ -36,18 +36,18 @@ class SplashScreen : AppCompatActivity() {
 
         splashScreenAnimation.setAnimationListener(object : Animation.AnimationListener{
             override fun onAnimationStart(animation: Animation?) {
-                TODO("Not yet implemented")
+                //
             }
 
             override fun onAnimationEnd(animation: Animation?) {
                 Handler(Looper.getMainLooper()).postDelayed({
                     startActivity(Intent(this@SplashScreen, MainActivity::class.java))
                     finish()
-                },1000)
+                },0)
             }
 
             override fun onAnimationRepeat(animation: Animation?) {
-                TODO("Not yet implemented")
+                //
             }
 
         })
